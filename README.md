@@ -1,7 +1,7 @@
 # CodeCodeRevolution
 Trabajo práctico de TLA
 
-#Para correrlo
+Para correrlo
 flex -o grammar.lex.c -l grammar.l
 vim grammar.lex.c    <- Agregar #include grammar.tab.h
 yacc -o grammar.tab.c -vd parser.y
