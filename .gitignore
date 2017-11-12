@@ -1,4 +1,5 @@
 grammar.lex.c
+*.swp
 grammar.tab.*
 grammar.output
 compiler

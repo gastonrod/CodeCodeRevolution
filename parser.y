@@ -3,6 +3,7 @@
   #include <string.h>
   #include "types.h"
   extern int yylex();
+  struct point board_size;
 %}
 
 %union{
@@ -21,12 +22,12 @@
 %token PLY IFZ
 %token OP OPBB OPB OPN
 %%
-Start  : SIZE Rule{printf("Entramos a size %d %d\n", yylval.pos.a,yylval.pos.b);}
+Start  : SIZE Rule{board_size.a = yylval.pos.a;board_size.b = yylval.pos.b;printf("Size: %d %d\n", yylval.pos.a,yylval.pos.b);}
   ;
-Rule:   POINT Op Rule{printf("Rule\n");}
-       |LAMBDA {printf("RLambda\n");}
+Rule:   POINT Op Rule{printf("Rule: %d %d\n", yylval.pos.a, yylval.pos.b);}
+       |LAMBDA {printf("Rule: Lambda\n");}
        ; 
-Op:     IPB{printf("IPB");}
+Op:     IPB{printf("IPB en %d %d",yylval.pos.a, yylval.pos.b);}
        |DPB{printf("DPB");}
        |IPF{printf("IPF");} 
        |DPF{printf("DPF");}
@@ -49,8 +50,6 @@ LAMBDA: {printf("\n-----Lambda-----\n");}
 #include <string.h>
 #include <stdio.h>
 char* progname;
-//struct size yylval;
-
 #include "types.h"
 main(int argc,char* argv[])
 {

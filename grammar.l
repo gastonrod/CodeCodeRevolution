@@ -1,5 +1,6 @@
 %{
   #include "types.h"
+  #include "grammar.tab.h"
 int
 strsplit (const char *str, char *parts[], const char *delimiter) {
   char *pch;
