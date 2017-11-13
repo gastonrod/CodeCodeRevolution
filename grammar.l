@@ -41,7 +41,6 @@ strsplit (const char *str, char *parts[], const char *delimiter) {
   return -1;
 }
 extern struct point board_size;
-extern struct point board_size;
 extern struct point pos;
 extern struct point double_b;
 extern int single_b;

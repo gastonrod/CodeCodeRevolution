@@ -1,21 +1,23 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef enum {
-  IPB,
-  DPB,
-  IPF,
-  DPF,
-  ADD,
-  SUB,
-  MUL,
-  DIV,
-  RDC,
-  PTC,
-  PLY,
-  IFZ
-} operations_enum;
+typedef enum 
+{
+ipb = 0,
+dpb,
+ipf,
+dpf,
+add,
+mul,
+diV,
+sub,
+rdc,
+ptc,
+ply,
+ifz
+} operation_type;
 
+//typedef yytokentype operation_type;
 typedef enum{
   BB,
   B,
@@ -28,15 +30,15 @@ struct point{
 };
 
 struct op{
-  operations_enum op_type;
-  subtype_enum    sub_type;
+  operation_type  op_type;
+  subtype_enum    subtype;
   struct point bb;
   int b;
   int num; 
 };
 
 struct instruction{
-  struct op operation;
-  struct point pos;
+  struct op* operation;
+  struct point* pos;
 };
 #endif
