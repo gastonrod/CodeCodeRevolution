@@ -4,16 +4,13 @@
   #include "types.h"
   extern int yylex();
   struct point board_size;
-%}
-
-%union{
-  #include "types.h"
   struct point pos;
   struct point double_b;
   int single_b;
   int single_n;
   char type[3];
-}
+%}
+
 %start Start
 %token SIZE POINT
 %token IPB DPB IPF DPF LOCATION
@@ -22,19 +19,19 @@
 %token PLY IFZ
 %token OP OPBB OPB OPN
 %%
-Start  : SIZE Rule{board_size.a = yylval.pos.a;board_size.b = yylval.pos.b;printf("Size: %d %d\n", yylval.pos.a,yylval.pos.b);}
+Start  : SIZE Rule{printf("Size: %d %d\n", board_size.a,board_size.b);}
   ;
-Rule:   POINT Op Rule{printf("Rule: %d %d\n", yylval.pos.a, yylval.pos.b);}
+Rule:   POINT Op Rule
        |LAMBDA {printf("Rule: Lambda\n");}
        ; 
-Op:     IPB{printf("IPB en %d %d",yylval.pos.a, yylval.pos.b);}
-       |DPB{printf("DPB");}
-       |IPF{printf("IPF");} 
-       |DPF{printf("DPF");}
-       |RDC{printf("RDC");}
-       |PTC{printf("PTC");}
-       |PLY{printf("PLY");}
-       |IFZ{printf("IFZ");}
+Op:     IPB{printf("IPB en %d %d",pos.a, pos.b);}
+       |DPB{printf("DPB en %d %d",pos.a, pos.b);}
+       |IPF{printf("IPF en %d %d",pos.a, pos.b);}
+       |DPF{printf("DPF en %d %d",pos.a, pos.b);}
+       |RDC{printf("RDC en %d %d",pos.a, pos.b);}
+       |PTC{printf("PTC en %d %d",pos.a, pos.b);}
+       |PLY{printf("PLY en %d %d",pos.a, pos.b);}
+       |IFZ{printf("IFZ en %d %d",pos.a, pos.b);}
        |ADD Tipo{printf("add");}
        |SUB Tipo{printf("sub");}
        |MUL Tipo{printf("mul");}
@@ -49,8 +46,9 @@ LAMBDA: {printf("\n-----Lambda-----\n");}
 %%
 #include <string.h>
 #include <stdio.h>
-char* progname;
 #include "types.h"
+
+char* progname;
 main(int argc,char* argv[])
 {
   progname = argv[0];

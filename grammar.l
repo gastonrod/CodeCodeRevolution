@@ -1,6 +1,7 @@
 %{
   #include "types.h"
   #include "grammar.tab.h"
+  #include "stdbool.h"
 int
 strsplit (const char *str, char *parts[], const char *delimiter) {
   char *pch;
@@ -39,33 +40,45 @@ strsplit (const char *str, char *parts[], const char *delimiter) {
     free(parts[j]);
   return -1;
 }
+extern struct point board_size;
+extern struct point board_size;
+extern struct point pos;
+extern struct point double_b;
+extern int single_b;
+extern int single_n;
+extern char type[3];
 
-void set_point(){
+void set_point(bool is_size){
   char*coor[2];
   strsplit(yytext,coor,",");
-  yylval.pos.a = atoi(coor[0]);
-  yylval.pos.b=atoi(coor[1]);
+  if(is_size){
+  board_size.a = atoi(coor[0]);
+  board_size.b = atoi(coor[1]);
+  }else{
+  pos.a = atoi(coor[0]);
+  pos.b = atoi(coor[1]);
+  }
 }
 
 void put_op(char* op){
-  yylval.type[0] = op[0];
-  yylval.type[1] = op[1];
-  yylval.type[2] = op[2];
+  type[0] = op[0];
+  type[1] = op[1];
+  type[2] = op[2];
 }
 
-void double_b(){
+void set_double_b(){
   char*coor[2];
   strsplit(yytext,coor,",");
-  yylval.double_b.a = atoi(coor[0]+1);
-  yylval.double_b.b = atoi(coor[1]+1);
+  double_b.a = atoi(coor[0]+1);
+  double_b.b = atoi(coor[1]+1);
 }
 
-void single_b(){
-  yylval.single_b = atoi(yytext+1);
+void set_single_b(){
+  single_b = atoi(yytext+1);
 }
 
-void single_number(){
-  yylval.single_n = atoi(yytext);
+void set_single_number(){
+  single_n = atoi(yytext);
 }
 %}
 %option noyywrap
@@ -104,27 +117,27 @@ digit [1-9][0-9]*
 <operador>"ply"                   BEGIN(rule);return PLY;
 <operador>"ifz"                   BEGIN(rule);return IFZ;
 <tipo>"b"{digit}",b"{digit}       {
-                                   printf("bb\n");
+                                   set_double_b();
                                    BEGIN(rule);
                                    return OPBB;
                                   }
 <tipo>"b"{digit}                  {
-                                   printf("b\n");
+                                   set_single_b();
                                    BEGIN(rule);
                                    return OPB;
                                    }
 <tipo>{digit}                     {
-                                   printf("num!\n");
+                                   set_single_number();
                                    BEGIN(rule);
                                    return OPN;
                                   }
 <rule>{digit}","{digit}" "        {
-                                   set_point();
+                                   set_point(false);
                                    BEGIN(operador);
                                    return POINT;
                                   }
 {digit}","{digit}                 {
-                                   set_point();
+                                   set_point(true);
                                    BEGIN(rule);
                                    return SIZE;
                                   }
