@@ -3,22 +3,23 @@
 
 typedef enum 
 {
-ipb = 0,
-dpb,
-ipf,
-dpf,
-add,
-mul,
-diV,  // Con V mayuscula xq bison define una func div y jode
-sub,
-rdc,
-ptc,
-ply,
-ifz
+  ipb = 0,
+  dpb,
+  ipf,
+  dpf,
+  add,
+  mul,
+  diV,  // Con V mayuscula xq bison define una func div y jode
+  sub,
+  rdc,
+  ptc,
+  ply,
+  ifz
 } operation_type;
 //char* operation_type_string[] = {"ipb","pb","ipf","dpf","add","mul","diV","sub","rdc","ptc","ply","ifz"};
 //typedef yytokentype operation_type;
-typedef enum{
+typedef enum
+{
   none = 0,
   BB,
   B,

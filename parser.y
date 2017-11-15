@@ -3,6 +3,8 @@
   #include <string.h>
   #include "types.h"
   #include "list.h"
+  #include "utilities.h"
+  #include "board.h"
   extern int yylex();
   struct point board_size;
   struct point pos;
@@ -15,6 +17,7 @@
   ListADT list;
 %}
 
+
 %start Start
 %token SIZE POINT
 %token IPB DPB IPF DPF LOCATION
@@ -23,7 +26,7 @@
 %token PLY IFZ
 %token OP OPBB OPB OPN
 %%
-Start  : SIZE Rule{printf("Size: %d %d\n", board_size.a,board_size.b);}
+Start  : SIZE Rule{printf("Size: %d %d\n\n", board_size.a,board_size.b);}
   ;
 Rule:   POINT Op Rule
        |LAMBDA {printf("Rule: Lambda\n");}
@@ -53,8 +56,6 @@ LAMBDA: {printf("\n-----Lambda-----\n");}
 #include "types.h"
 #include "list.h"
 char* progname;
-char* operation_type_string[] = {"ipb","dpb","ipf","dpf","add","mul","diV","sub","rdc","ptc","ply","ifz"};
-char* subtype_string[] = {"none", "BB" , "B", "NUM"};
 void print_instruction(struct instruction inst);
 int warning(char* s, char* t);
 int main(int argc,char* argv[])
@@ -64,10 +65,23 @@ int main(int argc,char* argv[])
   yyparse();
   ListIteratorADT iterator = get_iterator(list);
   struct instruction inst;
+  Board board;
+
+
+// Esto deberia ser new_board, pero no lo se hacer andar
+  // new_board(board);
+  board = malloc((sizeof *board) * board_size.a);
+  for(int i = 0; i < board_size.a; i++)
+    board[i] = malloc((sizeof *board) * board_size.b);
+
+
+
   while(iter_has_next(iterator)){
-  inst = *iter_get_next(iterator); 
-  print_instruction(inst);
+    struct instruction inst = *iter_get_next(iterator);
+    //print_instruction(inst);
+    add_instruction_to_board(board, inst);
   }
+  print_board(board);
 }
  
 int yyerror( s )
@@ -83,43 +97,4 @@ char *s , *t;
   fprintf( stderr ,"%s: %s\n" , progname , s );
   if ( t )
     fprintf( stderr , " %s\n" , t );
-}
-
-void print_instruction(struct instruction inst){
-  printf("\nPrinting instruction:\n");
-  printf("Op_Type: %s | Subtype: %s\n",operation_type_string[(*inst.op).op_type],subtype_string[(*inst.op).subtype]);
-
-
-  printf("Posicion: %d %d \n", (*inst.pos).a,(*inst.pos).b);
-
-  
-
-  printf("bb: (%d;%d)   | b: %d | num: %d\n",(*inst.op).bb.a, (*inst.op).bb.b, (*inst.op).b, (*inst.op).num);
-}
-
-
-void quick_add(operation_type ot, subtype_enum st){
-  add_to_list(list,get_instruction(pos, ot, st, double_b, single_b, single_n));
-  switch(st){
-    case BB:
-      double_b.a = 0;
-      double_b.b = 0;
-      break;
-    case B:
-      single_b   = 0;
-      break;
-    case NUM:
-      single_n   = 0;
-      break;
-  }
-}
-void quick_add_comp(subtype_enum st){
-  if     (type[0] == 'a')
-    quick_add(add, st);
-  else if(type[0] == 's')
-    quick_add(sub, st);
-  else if(type[0] == 'm')
-    quick_add(mul, st);
-  else if(type[0] == 'd')
-    quick_add(diV, st);
 }

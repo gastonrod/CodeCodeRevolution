@@ -124,7 +124,7 @@ digit [1-9][0-9]*
                                    set_single_b();
                                    BEGIN(rule);
                                    return OPB;
-                                   }
+                                  }
 <tipo>{digit}                     {
                                    set_single_number();
                                    BEGIN(rule);
@@ -140,5 +140,6 @@ digit [1-9][0-9]*
                                    BEGIN(rule);
                                    return SIZE;
                                   }
+.                                 ECHO;
 %%
 
