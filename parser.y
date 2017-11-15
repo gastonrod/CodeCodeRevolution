@@ -10,7 +10,8 @@
   int single_b;
   int single_n;
   char type[3];
-
+  void quick_add(operation_type ot, subtype_enum st);
+  void quick_add_comp(subtype_enum st);
   ListADT list;
 %}
 
@@ -27,22 +28,22 @@ Start  : SIZE Rule{printf("Size: %d %d\n", board_size.a,board_size.b);}
 Rule:   POINT Op Rule
        |LAMBDA {printf("Rule: Lambda\n");}
        ; 
-Op:     IPB{add_to_list(list,get_instruction(pos, ipb, B, pos, -1, -1));printf("IPB en %d %d",pos.a, pos.b);}
-       |DPB{printf("DPB en %d %d",pos.a, pos.b);}
-       |IPF{printf("IPF en %d %d",pos.a, pos.b);}
-       |DPF{printf("DPF en %d %d",pos.a, pos.b);}
-       |RDC{printf("RDC en %d %d",pos.a, pos.b);}
-       |PTC{printf("PTC en %d %d",pos.a, pos.b);}
-       |PLY{printf("PLY en %d %d",pos.a, pos.b);}
-       |IFZ{printf("IFZ en %d %d",pos.a, pos.b);}
+Op:     IPB{quick_add(ipb, none);printf("IPB en %d %d",pos.a, pos.b);}
+       |DPB{quick_add(dpb, none);printf("DPB en %d %d",pos.a, pos.b);}
+       |IPF{quick_add(ipf, none);printf("IPF en %d %d",pos.a, pos.b);}
+       |DPF{quick_add(dpf, none);printf("DPF en %d %d",pos.a, pos.b);}
+       |RDC{quick_add(rdc, none);printf("RDC en %d %d",pos.a, pos.b);}
+       |PTC{quick_add(ptc, none);printf("PTC en %d %d",pos.a, pos.b);}
+       |PLY{quick_add(ply, none);printf("PLY en %d %d",pos.a, pos.b);}
+       |IFZ{quick_add(ifz, none);printf("IFZ en %d %d",pos.a, pos.b);}
        |ADD Tipo{printf("add");}
        |SUB Tipo{printf("sub");}
        |MUL Tipo{printf("mul");}
        |DIV Tipo{printf("div");}
        ;
-Tipo:   OPBB{printf("OPBB");}
-       |OPB {printf("OPB");}
-       |OPN {printf("OPN");}
+Tipo:   OPBB{quick_add_comp(BB);printf("OPBB %s", type);}
+       |OPB {quick_add_comp(B);printf("OPB");}
+       |OPN {quick_add_comp(NUM);printf("OPN");}
        ;
 LAMBDA: {printf("\n-----Lambda-----\n");}
        ;
@@ -52,25 +53,73 @@ LAMBDA: {printf("\n-----Lambda-----\n");}
 #include "types.h"
 #include "list.h"
 char* progname;
-main(int argc,char* argv[])
+char* operation_type_string[] = {"ipb","dpb","ipf","dpf","add","mul","diV","sub","rdc","ptc","ply","ifz"};
+char* subtype_string[] = {"none", "BB" , "B", "NUM"};
+void print_instruction(struct instruction inst);
+int warning(char* s, char* t);
+int main(int argc,char* argv[])
 {
   list = new_list();
   progname = argv[0];
   yyparse();
-//  printf("imprimo en main el 1er ipb : %d %d\n", (*list).first.data.pos.a, (*list).first.data.pos.b);
+  ListIteratorADT iterator = get_iterator(list);
+  struct instruction inst;
+  while(iter_has_next(iterator)){
+  inst = *iter_get_next(iterator); 
+  print_instruction(inst);
+  }
 }
  
-yyerror( s )
+int yyerror( s )
 char *s;
 {
   warning( s , ( char * )0 );
   yyparse();
 }
  
-warning( s , t )
+int warning( s , t )
 char *s , *t;
 {
   fprintf( stderr ,"%s: %s\n" , progname , s );
   if ( t )
     fprintf( stderr , " %s\n" , t );
+}
+
+void print_instruction(struct instruction inst){
+  printf("\nPrinting instruction:\n");
+  printf("Op_Type: %s | Subtype: %s\n",operation_type_string[(*inst.op).op_type],subtype_string[(*inst.op).subtype]);
+
+
+  printf("Posicion: %d %d \n", (*inst.pos).a,(*inst.pos).b);
+
+  
+
+  printf("bb: (%d;%d)   | b: %d | num: %d\n",(*inst.op).bb.a, (*inst.op).bb.b, (*inst.op).b, (*inst.op).num);
+}
+
+
+void quick_add(operation_type ot, subtype_enum st){
+  add_to_list(list,get_instruction(pos, ot, st, double_b, single_b, single_n));
+  switch(st){
+    case BB:
+      double_b.a = 0;
+      double_b.b = 0;
+      break;
+    case B:
+      single_b   = 0;
+      break;
+    case NUM:
+      single_n   = 0;
+      break;
+  }
+}
+void quick_add_comp(subtype_enum st){
+  if     (type[0] == 'a')
+    quick_add(add, st);
+  else if(type[0] == 's')
+    quick_add(sub, st);
+  else if(type[0] == 'm')
+    quick_add(mul, st);
+  else if(type[0] == 'd')
+    quick_add(diV, st);
 }
