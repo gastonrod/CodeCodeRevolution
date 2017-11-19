@@ -5,7 +5,9 @@
   #include "list.h"
   #include "utilities.h"
   #include "board.h"
+  #include "parser_utilities.h"
   extern int yylex();
+  extern char* operation_type_string[];
   struct point board_size;
   struct point pos;
   struct point double_b;
@@ -26,29 +28,29 @@
 %token PLY IFZ
 %token OP OPBB OPB OPN
 %%
-Start  : SIZE Rule{printf("Size: %d %d\n\n", board_size.a,board_size.b);}
+Start  : SIZE Rule{print_set_size();}
   ;
 Rule:   POINT Op Rule
-       |LAMBDA {printf("Rule: Lambda\n");}
+       |LAMBDA {}
        ; 
-Op:     IPB{quick_add(ipb, none);printf("IPB en %d %d",pos.a, pos.b);}
-       |DPB{quick_add(dpb, none);printf("DPB en %d %d",pos.a, pos.b);}
-       |IPF{quick_add(ipf, none);printf("IPF en %d %d",pos.a, pos.b);}
-       |DPF{quick_add(dpf, none);printf("DPF en %d %d",pos.a, pos.b);}
-       |RDC{quick_add(rdc, none);printf("RDC en %d %d",pos.a, pos.b);}
-       |PTC{quick_add(ptc, none);printf("PTC en %d %d",pos.a, pos.b);}
-       |PLY{quick_add(ply, none);printf("PLY en %d %d",pos.a, pos.b);}
-       |IFZ{quick_add(ifz, none);printf("IFZ en %d %d",pos.a, pos.b);}
-       |ADD Tipo{printf("add");}
-       |SUB Tipo{printf("sub");}
-       |MUL Tipo{printf("mul");}
-       |DIV Tipo{printf("div");}
+Op:     IPB{print_add_instruction(ipb,none);/*quick_add(ipb, none);*/}
+       |DPB{print_add_instruction(dpb,none);/*quick_add(dpb, none);*/}
+       |IPF{print_add_instruction(ipf,none);/*quick_add(ipf, none);*/}
+       |DPF{print_add_instruction(dpf,none);/*quick_add(dpf, none);*/}
+       |RDC{print_add_instruction(rdc,none);/*quick_add(rdc, none);*/}
+       |PTC{print_add_instruction(ptc,none);/*quick_add(ptc, none);*/}
+       |PLY{print_add_instruction(ply,none);/*quick_add(ply, none);*/}
+       |IFZ{print_add_instruction(ifz,none);/*quick_add(ifz, none);*/}
+       |ADD Tipo{}
+       |SUB Tipo{}
+       |MUL Tipo{}
+       |DIV Tipo{}
        ;
-Tipo:   OPBB{quick_add_comp(BB);printf("OPBB %s", type);}
-       |OPB {quick_add_comp(B);printf("OPB");}
-       |OPN {quick_add_comp(NUM);printf("OPN");}
+Tipo:   OPBB{print_add_composite_instruction( BB);double_b.a = 0; double_b.b = 0;/*quick_add_comp(BB);*/}
+       |OPB {print_add_composite_instruction(  B);single_b   = 0;/*quick_add_comp(B);*/}
+       |OPN {print_add_composite_instruction(NUM);single_n   = 0;/*quick_add_comp(NUM);*/}
        ;
-LAMBDA: {printf("\n-----Lambda-----\n");}
+LAMBDA: {}
        ;
 %%
 #include <string.h>
@@ -60,20 +62,22 @@ void print_instruction(struct instruction inst);
 int warning(char* s, char* t);
 int main(int argc,char* argv[])
 {
+  print_includes();
+  print_main();
   list = new_list();
   progname = argv[0];
   yyparse();
+  
+
+  /*
   ListIteratorADT iterator = get_iterator(list);
   struct instruction inst;
   Board board;
-
-
-// Esto deberia ser new_board, pero no lo se hacer andar
+  // Esto deberia ser new_board, pero no lo se hacer andar
   // new_board(board);
   board = malloc((sizeof *board) * board_size.a);
   for(int i = 0; i < board_size.a; i++)
     board[i] = malloc((sizeof *board) * board_size.b);
-
 
 
   while(iter_has_next(iterator)){
@@ -82,6 +86,7 @@ int main(int argc,char* argv[])
     add_instruction_to_board(board, inst);
   }
   print_board(board);
+  */
 }
  
 int yyerror( s )
