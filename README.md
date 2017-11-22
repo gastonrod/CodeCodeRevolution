@@ -21,22 +21,18 @@ Eso te deja un a.brd al cual le vas a pasar el codigo a ejecutar.
 ```
 
 # Instrucciones disponibles
-pb: puntero de buckets
+**pb**: puntero de buckets
 
-pf: puntero a función
+**pf**: puntero a función
 
-Posible set de instrucciones:
 
-      _
-add    |
+**add**    |
 
-sub    |
+**sub**    |
 
-mul    | -> (número|bucket,(bucket|número))
+**mul**    | -> (número|bucket,(bucket|número))
 
-div    |
-
-      --
+**div**    |
 ```
         add b1,b2     // Guarda en el lugar al que esté apuntando el pb la suma entre                     b1 y b2
         div b1,5     // Lo mismo pero b1/5
@@ -45,23 +41,23 @@ div    |
 
 Increase y decrease punteros.
 
-ipb    incrementa el pb 
+**ipb**    incrementa el pb 
 
-dpb    decrementa el pb
+**dpb**    decrementa el pb
 
-ipf    incrementa el pf
+**ipf**    incrementa el pf
 
-dpf    decrementa el pf
-
-
-rdc    lee un char y lo guarda en el bucket que está siendo apuntado por el pb (readchar())
+**dpf**    decrementa el pf
 
 
-ptc    escribe lo que sea que esté siendo apuntado por el pb (un char) (putchar())
+**rdc**    lee un char y lo guarda en el bucket que está siendo apuntado por el pb (readchar())
 
-ply    Ejecuta la función a la que está apuntando el pf
 
-ifz    Si la variable que está siendo apuntada por el pb es cero, entonces se mueve el “instruction pointer” hacia el tag definido inmediatamente después de la J que lo hizo saltar sobre el ifz. 
+**ptc**    escribe lo que sea que esté siendo apuntado por el pb (un char) (putchar())
+
+**ply**    Ejecuta la función a la que está apuntando el pf
+
+**ifz**    Si la variable que está siendo apuntada por el pb es cero, entonces se mueve el “instruction pointer” hacia el tag definido inmediatamente después de la J que lo hizo saltar sobre el ifz. 
 
 # Forma del codigo
 
@@ -84,13 +80,13 @@ R    Moverse un casillero hacia la derecha
 # Gramatica del lenguaje
 
 ## Tablero
-Size ->N,N\nRule
+**Size** ->N,N\nRule
 
-Rule->N,N Op\nRule|λ
+**Rule**->N,N Op\nRule|λ
 
-Op   ->add Tipo|sub Tipo|mul Tipo|div Tipo|ipb|dpb|ipf|dpf|rdc|ptc|ply|ifz
+**Op**   ->add Tipo|sub Tipo|mul Tipo|div Tipo|ipb|dpb|ipf|dpf|rdc|ptc|ply|ifz
 
-Tipo->N|bN,bN|bN
+**Tipo**->N|bN,bN|bN
 
 
 ### Ejemplo
@@ -106,13 +102,13 @@ Tipo->N|bN,bN|bN
 ```
 
 ## Codigo
-S ->u|r|d|l|j|uS|rS|dS|lS|jS|TS|T’S|CS|FS| S|\tS|\nS|λ
+**S** ->u|r|d|l|j|uS|rS|dS|lS|jS|TS|T’S|CS|FS| S|\tS|\nS|λ
 
-T ->{N}
+**T** ->{N}
 
-T’->{gotoN}
+**T’**->{gotoN}
 
-N ->[1-9][0-9]*
+**N** ->[1-9][0-9]*
 
 C ->//[a-zA-Z0-9 \t]*(\n|EOF)
 
