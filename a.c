@@ -21,7 +21,7 @@ int single_n;
 char type[3];
 
 
-int main(int argc, char* argv[]){
+int main(){
   list = new_list();
   hacer_adds();
   set_size();
@@ -39,6 +39,7 @@ int main(int argc, char* argv[]){
     add_instruction_to_board(board, inst);
   }
   print_board(board);
+  printf("tablero armado, a partir de aca es lectura de lrjs y to2 eso\n");
 }
 
 void hacer_adds(){
@@ -47,18 +48,102 @@ void hacer_adds(){
   double_b.b = 0;
   single_b   = 0;
   single_n   = 0;
+  pos.a      = 1;
+  pos.b      = 1;
   quick_add(ipb, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 1;
+  pos.b      = 2;
+  quick_add(ply, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 1;
+  pos.b      = 3;
+  quick_add(ipb, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 1;
+  pos.b      = 4;
+  quick_add(dpb, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 2;
+  pos.b      = 1;
+  quick_add(ipf, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 2;
+  pos.b      = 2;
+  quick_add(dpf, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 2;
+  pos.b      = 3;
+  quick_add(rdc, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 0;
+  pos.a      = 2;
+  pos.b      = 4;
+  quick_add(ptc, none);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 1;
+  single_n   = 0;
+  pos.a      = 3;
+  pos.b      = 1;
+  quick_add(add, B);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 1;
+  pos.a      = 3;
+  pos.b      = 2;
+  quick_add(sub, NUM);
 
   double_b.a = 1;
   double_b.b = 2;
   single_b   = 0;
   single_n   = 0;
-  quick_add(add, BB);
+  pos.a      = 3;
+  pos.b      = 3;
+  quick_add(diV, BB);
+
+  double_b.a = 0;
+  double_b.b = 0;
+  single_b   = 0;
+  single_n   = 178;
+  pos.a      = 3;
+  pos.b      = 4;
+  quick_add(mul, NUM);
 
 }
 
 
 void set_size(){
-  board_size.a = 1;
-  board_size.b = 2;
+  board_size.a = 4;
+  board_size.b = 3;
 }

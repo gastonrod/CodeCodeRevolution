@@ -12,23 +12,25 @@ void quick_add(operation_type ot, subtype_enum st);
 void quick_add_comp(subtype_enum st);
 
 
-void print_add_instruction(operation_type ot, subtype_enum st){
+void print_add_instruction(operation_type ot, subtype_enum st, struct point pos){
   printf("  double_b.a = %d;\n"
          "  double_b.b = %d;\n"
 	 "  single_b   = %d;\n"
 	 "  single_n   = %d;\n"
-	 "  quick_add(%s, %s);\n", double_b.a, double_b.b, single_b, single_n, operation_type_string[ot], subtype_string[st]);
+	 "  pos.a      = %d;\n"
+	 "  pos.b      = %d;\n"
+	 "  quick_add(%s, %s);\n", double_b.a, double_b.b, single_b, single_n, pos.a, pos.b, operation_type_string[ot], subtype_string[st]);
 }
 
-void print_add_composite_instruction(subtype_enum st){
+void print_add_composite_instruction(subtype_enum st, struct point pos){
   if     (type[0] == 'a')
-    print_add_instruction(add, st);
+    print_add_instruction(add, st, pos);
   else if(type[0] == 's')
-    print_add_instruction(sub, st);
+    print_add_instruction(sub, st, pos);
   else if(type[0] == 'm')
-    print_add_instruction(mul, st);
+    print_add_instruction(mul, st, pos);
   else if(type[0] == 'd')
-    print_add_instruction(diV,st);
+    print_add_instruction(diV, st, pos);
 }
 
 void print_includes(){
@@ -74,6 +76,7 @@ void print_main(){
 	 "    add_instruction_to_board(board, inst);\n"
 	 "  }\n"
 	 "  print_board(board);\n"
+	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"
          "}\n\n"
 	 
 	 "void hacer_adds(){\n");

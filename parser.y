@@ -33,22 +33,22 @@ Start  : SIZE Rule{print_set_size();}
 Rule:   POINT Op Rule
        |LAMBDA {}
        ; 
-Op:     IPB{print_add_instruction(ipb,none);/*quick_add(ipb, none);*/}
-       |DPB{print_add_instruction(dpb,none);/*quick_add(dpb, none);*/}
-       |IPF{print_add_instruction(ipf,none);/*quick_add(ipf, none);*/}
-       |DPF{print_add_instruction(dpf,none);/*quick_add(dpf, none);*/}
-       |RDC{print_add_instruction(rdc,none);/*quick_add(rdc, none);*/}
-       |PTC{print_add_instruction(ptc,none);/*quick_add(ptc, none);*/}
-       |PLY{print_add_instruction(ply,none);/*quick_add(ply, none);*/}
-       |IFZ{print_add_instruction(ifz,none);/*quick_add(ifz, none);*/}
+Op:     IPB{print_add_instruction(ipb,none,pos);/*quick_add(ipb, none);*/}
+       |DPB{print_add_instruction(dpb,none,pos);/*quick_add(dpb, none);*/}
+       |IPF{print_add_instruction(ipf,none,pos);/*quick_add(ipf, none);*/}
+       |DPF{print_add_instruction(dpf,none,pos);/*quick_add(dpf, none);*/}
+       |RDC{print_add_instruction(rdc,none,pos);/*quick_add(rdc, none);*/}
+       |PTC{print_add_instruction(ptc,none,pos);/*quick_add(ptc, none);*/}
+       |PLY{print_add_instruction(ply,none,pos);/*quick_add(ply, none);*/}
+       |IFZ{print_add_instruction(ifz,none,pos);/*quick_add(ifz, none);*/}
        |ADD Tipo{}
        |SUB Tipo{}
        |MUL Tipo{}
        |DIV Tipo{}
        ;
-Tipo:   OPBB{print_add_composite_instruction( BB);double_b.a = 0; double_b.b = 0;/*quick_add_comp(BB);*/}
-       |OPB {print_add_composite_instruction(  B);single_b   = 0;/*quick_add_comp(B);*/}
-       |OPN {print_add_composite_instruction(NUM);single_n   = 0;/*quick_add_comp(NUM);*/}
+Tipo:   OPBB{print_add_composite_instruction( BB,pos);double_b.a = 0; double_b.b = 0;/*quick_add_comp(BB);*/}
+       |OPB {print_add_composite_instruction(  B,pos);single_b   = 0;/*quick_add_comp(B);*/}
+       |OPN {print_add_composite_instruction(NUM,pos);single_n   = 0;/*quick_add_comp(NUM);*/}
        ;
 LAMBDA: {}
        ;
