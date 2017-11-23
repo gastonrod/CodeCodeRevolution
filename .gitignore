@@ -1,6 +1,8 @@
-grammar.lex.c
+*.lex.c
 *.swp
 grammar.tab.*
 grammar.output
 compiler
 *.o*
+a.c
+a.brd

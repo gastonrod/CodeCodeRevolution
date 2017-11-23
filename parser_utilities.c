@@ -41,12 +41,16 @@ void print_includes(){
          "#include \"list.h\"\n"
 	 "#include \"utilities.h\"\n"
 	 "\n\n"
+	 "#define BUFFER_SIZE 1024\n"
+	 "\n\n"
 	 "void hacer_adds();\n"
 	 "void set_size();\n"
+         "void yylex();\n"
 	 "\n\n"
 	 "ListADT list;\n"
          "extern char* operation_type_string[];\n"
          "extern char* subtype_string[];\n"
+	 "extern char* code;\n"
          "struct point board_size;\n"
          "struct point pos;\n"
          "struct point double_b;\n"
@@ -58,6 +62,7 @@ void print_includes(){
 }
 
 void print_main(){
+  char porcentaje_s[3] = "%s\0";
   printf("int main(){\n"
          "  list = new_list();\n"
          "  hacer_adds();\n"
@@ -77,9 +82,13 @@ void print_main(){
 	 "  }\n"
 	 "  print_board(board);\n"
 	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"
+	 "  code = malloc(BUFFER_SIZE);\n"
+	 "  yylex();\n"
+	 "  printf(\"%s\\n\",code);\n"
+	 "  printf(\"Codigo recibido, aca hay que armar la maquina de estados y eso\\n\");\n"
          "}\n\n"
 	 
-	 "void hacer_adds(){\n");
+	 "void hacer_adds(){\n", porcentaje_s);
 
 }
 
