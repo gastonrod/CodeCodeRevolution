@@ -1,4 +1,5 @@
 %{
+  #include <stdlib.h>
   #include <stdio.h>
   #include <string.h>
   #include "types.h"
@@ -33,22 +34,22 @@ Start  : SIZE Rule{print_set_size();}
 Rule:   POINT Op Rule
        |LAMBDA {}
        ; 
-Op:     IPB{print_add_instruction(ipb,none,pos);/*quick_add(ipb, none);*/}
-       |DPB{print_add_instruction(dpb,none,pos);/*quick_add(dpb, none);*/}
-       |IPF{print_add_instruction(ipf,none,pos);/*quick_add(ipf, none);*/}
-       |DPF{print_add_instruction(dpf,none,pos);/*quick_add(dpf, none);*/}
-       |RDC{print_add_instruction(rdc,none,pos);/*quick_add(rdc, none);*/}
-       |PTC{print_add_instruction(ptc,none,pos);/*quick_add(ptc, none);*/}
-       |PLY{print_add_instruction(ply,none,pos);/*quick_add(ply, none);*/}
-       |IFZ{print_add_instruction(ifz,none,pos);/*quick_add(ifz, none);*/}
+Op:     IPB{print_add_instruction(ipb,none,pos);quick_add(ipb, none);}
+       |DPB{print_add_instruction(dpb,none,pos);quick_add(dpb, none);}
+       |IPF{print_add_instruction(ipf,none,pos);quick_add(ipf, none);}
+       |DPF{print_add_instruction(dpf,none,pos);quick_add(dpf, none);}
+       |RDC{print_add_instruction(rdc,none,pos);quick_add(rdc, none);}
+       |PTC{print_add_instruction(ptc,none,pos);quick_add(ptc, none);}
+       |PLY{print_add_instruction(ply,none,pos);quick_add(ply, none);}
+       |IFZ{print_add_instruction(ifz,none,pos);quick_add(ifz, none);}
        |ADD Tipo{}
        |SUB Tipo{}
        |MUL Tipo{}
        |DIV Tipo{}
        ;
-Tipo:   OPBB{print_add_composite_instruction( BB,pos);double_b.a = 0; double_b.b = 0;/*quick_add_comp(BB);*/}
-       |OPB {print_add_composite_instruction(  B,pos);single_b   = 0;/*quick_add_comp(B);*/}
-       |OPN {print_add_composite_instruction(NUM,pos);single_n   = 0;/*quick_add_comp(NUM);*/}
+Tipo:   OPBB{print_add_composite_instruction( BB,pos);double_b.a = 0;double_b.b = 0;quick_add_comp(BB);}
+       |OPB {print_add_composite_instruction(  B,pos);single_b   = 0;quick_add_comp(B);}
+       |OPN {print_add_composite_instruction(NUM,pos);single_n   = 0;quick_add_comp(NUM);}
        ;
 LAMBDA: {}
        ;
@@ -69,24 +70,18 @@ int main(int argc,char* argv[])
   yyparse();
   
 
-  /*
+  
   ListIteratorADT iterator = get_iterator(list);
   struct instruction inst;
-  Board board;
-  // Esto deberia ser new_board, pero no lo se hacer andar
-  // new_board(board);
-  board = malloc((sizeof *board) * board_size.a);
-  for(int i = 0; i < board_size.a; i++)
-    board[i] = malloc((sizeof *board) * board_size.b);
-
 
   while(iter_has_next(iterator)){
     struct instruction inst = *iter_get_next(iterator);
-    //print_instruction(inst);
-    add_instruction_to_board(board, inst);
+    if((*inst.pos).a < 1 || (*inst.pos).a > board_size.b || (*inst.pos).b < 1 || (*inst.pos).b > board_size.a){
+      fprintf(stderr, "Error! Index out of bounds. Fijate como estas armando la tabla\n");
+      exit(0);
+    }
   }
-  print_board(board);
-  */
+  return 1;  
 }
  
 int yyerror( s )

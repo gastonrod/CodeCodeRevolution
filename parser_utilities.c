@@ -86,6 +86,7 @@ void print_main(){
 	 "  yylex();\n"
 	 "  printf(\"%s\\n\",code);\n"
 	 "  printf(\"Codigo recibido, aca hay que armar la maquina de estados y eso\\n\");\n"
+	 "  return 1;\n"
          "}\n\n"
 	 
 	 "void hacer_adds(){\n", porcentaje_s);
