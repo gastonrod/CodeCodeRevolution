@@ -14,6 +14,4 @@ else
 fi
 if [ $? == 0 ];then
   rm a.c
-else
-  gcc board.c list.c utilities.c a.c code.lex.c -o a.brd
 fi
