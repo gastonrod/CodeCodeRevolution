@@ -135,15 +135,20 @@ int main(void) {
   size = 0;
   code = malloc(BUFFER_SIZE);
   yylex(); 
-  
-  printf("#define BUFFER_SIZE 1024\n");
-  printf("char* code= \"%s\";\n", code);
-  printf("char* function[BUFFER_SIZE];\n", code);
+  printf("#include <stdlib.h>\n"
+         "#define BUFFER_SIZE 1024\n"
+         "char* code= \"%s\";\n"
+         "char* function[BUFFER_SIZE];\n"
+         "void fill_functions(){\n", code, code);
   for(int i = 0; i < BUFFER_SIZE; i++){
-  if(function[i] != NULL)
-    printf("function[%d]: \"%s\";\n",i, function[i]);
+    if(function[i] != NULL){
+      int fun_len = strlen(function[i]);
+      printf("function[%d]= malloc(%d * sizeof function[0]);\n",i, fun_len);
+      for(int j = 0; j < fun_len;j++)
+        printf("function[%d][%d] = '%c';\n",i, j, function[i][j]);
+    }
   }
-
+  printf("}\n");
   return 0; 
 }
 
