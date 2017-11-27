@@ -2,7 +2,7 @@
   // c code
   #include <string.h>
   #include <ctype.h>
-  #define BUFFER_SIZE 1024
+  #include "code_executor.h"
   char* code;
   int size = 0;
   int tags [BUFFER_SIZE];
