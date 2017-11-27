@@ -1,0 +1,35 @@
+// "Hola mundo!" para tablero definido en prueba_gramatica.txt
+ddd // Me paro en add 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+//bucket actual = 72 == 'H'
+rrruj // Voy a ptc e imprimo la H
+llld  // Vuelvo al add 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // 72+39 = 'o'
+rrruj // Voy a ptc e imprimo la o
+lld  // Voy al sub 1
+jjj  // 111-3 = 'l'
+rruj // ptc 'l'
+lld  // sub 1
+jjjjjjjjjjj // 108-11 = 'a'
+rruj // ptc 'a'
+lld  // sub 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // ' '
+rruj // ptc ' '
+llld // add 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // 'm'
+rrruj // ptc 'm'
+llld  // add 1
+jjjjjjjj // 'u'
+rrruj // ptc 'u;
+lld   // sub 1
+jjjjjjj // 'n'
+rruj  // ptc 'n'
+lld   // sub 1
+jjjjjjjjjj // 'd'
+rruj  // ptc 'd'
+llld  // add 1
+jjjjjjjjjjj // 'o'
+rrruj // ptc 'o'
+lld   // sub 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // '!'
+rruj  // ptc '!'

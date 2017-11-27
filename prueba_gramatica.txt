@@ -7,7 +7,7 @@
 2,2 dpf
 2,3 rdc
 2,4 ptc
-3,1 add b1
+3,1 add 1
 3,2 sub 1
 3,3 div b1,b2
 3,4 mul 178
