@@ -5,20 +5,25 @@ Trabajo práctico de Automatas, Teoria de Lenguajes y Compiladores.
 # Correr el proyecto
 
 Clona el repositorio
+Si no le pasas argumento al make.sh toma por default prueba_gramatica.txt como board a armar y prueba_codigo.txt como el codigo a ejecutar.
+Si le pasas 1 argumento asume que es el board a armar. 
+Si le pasas dos argumentos el 1ero es el board el 2ndo es el codigo.
 ```
 ./make.sh [archivo con el tablero definido]
 ```
-Eso te deja un a.brd al cual le vas a pasar el codigo a ejecutar.
+Esto va a dejar un
+```
+code_compiler.out
+cboard_compiler.out
 
+final_compiler.c
+code_container.c
 ```
-./a.brd < [archivo con el codigo]
-```
-[Todavia no esta hecho esto]
-## Ejemplo
-```
-./make.sh prueba_gramatica.txt
-./a.brd < prueba_codigo.txt
-```
+Al code_compiler.out le pasas por entrada estandar codigo y al board_compiler.out le pasas el tablero
+[Esto lo va a hacer el make]
+Despues, vas a compilar con gcc final_compiler.c code_container.c blahblahblah -o miprograma.out
+
+Y voila!
 
 # Instrucciones disponibles
 **pb**: puntero de buckets
