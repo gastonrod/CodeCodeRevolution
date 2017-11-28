@@ -128,6 +128,9 @@ code [uldrjULDRJ]
 "\t"                        ;
 " "                         ;
 "{"{digit}"}"               add_tag();BEGIN(codigo);
+.|\n                        { fprintf(stderr, "La cagaste al principio\n"); exit(0); }
+<codigo>.|\n                        { fprintf(stderr, "La cagaste en el codigo principal\n"); exit(0); }
+<funcion>.|\n                        { fprintf(stderr, "La cagaste en una funcion\n"); exit(0); }
 %%
 
 int main(void) { 

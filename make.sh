@@ -15,11 +15,13 @@ else
   ./board_compiler.out > final_compiler.c < $1
 fi
 if [ $? == 0 ];then
-  rm a.c
+  rm final_compiler.c
 fi
 if [ $# == 1 ] || [ $# == 0 ];then
   ./code_compiler.out > code_container.c < prueba_codigo.txt
 else
   ./code_compiler.out > code_container.c < $2
 fi
-
+if [ $? == 0 ];then
+  rm code_container.c
+fi

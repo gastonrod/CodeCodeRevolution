@@ -86,7 +86,6 @@ void set_single_number(){
 %x tipo
 digit [1-9][0-9]*
 %%
-\n                                ;
 <operador>"add "                  {
                                    put_op("add");
                                    BEGIN(tipo);
@@ -107,25 +106,25 @@ digit [1-9][0-9]*
                                    BEGIN(tipo);
                                    return DIV;
                                   }
-<operador>"ipb"                   BEGIN(rule);return IPB;
-<operador>"dpb"                   BEGIN(rule);return DPB;
-<operador>"ipf"                   BEGIN(rule);return IPF;
-<operador>"dpf"                   BEGIN(rule);return DPF;
-<operador>"rdc"                   BEGIN(rule);return RDC;
-<operador>"ptc"                   BEGIN(rule);return PTC;
-<operador>"ply"                   BEGIN(rule);return PLY;
-<operador>"ifz"                   BEGIN(rule);return IFZ;
-<tipo>"b"{digit}",b"{digit}       {
+<operador>"ipb\n"                 BEGIN(rule);return IPB;
+<operador>"dpb\n"                 BEGIN(rule);return DPB;
+<operador>"ipf\n"                 BEGIN(rule);return IPF;
+<operador>"dpf\n"                 BEGIN(rule);return DPF;
+<operador>"rdc\n"                 BEGIN(rule);return RDC;
+<operador>"ptc\n"                 BEGIN(rule);return PTC;
+<operador>"ply\n"                 BEGIN(rule);return PLY;
+<operador>"ifz\n"                 BEGIN(rule);return IFZ;
+<tipo>"b"{digit}",b"{digit}"\n"   {
                                    set_double_b();
                                    BEGIN(rule);
                                    return OPBB;
                                   }
-<tipo>"b"{digit}                  {
+<tipo>"b"{digit}"\n"              {
                                    set_single_b();
                                    BEGIN(rule);
                                    return OPB;
                                   }
-<tipo>{digit}                     {
+<tipo>{digit}"\n"                 {
                                    set_single_number();
                                    BEGIN(rule);
                                    return OPN;
@@ -135,11 +134,27 @@ digit [1-9][0-9]*
                                    BEGIN(operador);
                                    return POINT;
                                   }
-{digit}","{digit}                 {
+<operador>.|\n                    {
+                                   fprintf(stderr, "La cagaste en un operador\n"); 
+                                   exit(0);
+                                  }
+<tipo>.|\n                        {
+                                   fprintf(stderr, "La cagaste en tipo\n"); 
+                                   exit(0);
+                                  }
+<rule>.|\n                        {
+                                   fprintf(stderr, "La cagaste en rule\n");
+                                    exit(0);
+                                  }
+{digit}","{digit}"\n"             {
                                    set_point(true);
                                    BEGIN(rule);
                                    return SIZE;
                                   }
-.                                 ECHO;
+.|\n                              {
+                                   fprintf(stderr, "La cagaste al principio\n");
+                                    exit(0);
+                                  }
+
 %%
 

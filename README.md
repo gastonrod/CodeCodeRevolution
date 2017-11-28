@@ -5,8 +5,11 @@ Trabajo práctico de Automatas, Teoria de Lenguajes y Compiladores.
 # Correr el proyecto
 
 Clona el repositorio
+
 Si no le pasas argumento al make.sh toma por default prueba_gramatica.txt como board a armar y prueba_codigo.txt como el codigo a ejecutar.
+
 Si le pasas 1 argumento asume que es el board a armar. 
+
 Si le pasas dos argumentos el 1ero es el board el 2ndo es el codigo.
 ```
 ./make.sh [archivo con el tablero definido]
@@ -19,8 +22,11 @@ cboard_compiler.out
 final_compiler.c
 code_container.c
 ```
-Al code_compiler.out le pasas por entrada estandar codigo y al board_compiler.out le pasas el tablero
+
+Al code_compiler.out le pasas por entrada estandar codigo y al board_compiler.out le pasas el tablero. Esto ya lo hizo automaticamente el make.sh con lo que le hayas pasado. Pero en caso de querer usar un codigo para mas de un tablero, o un tablero para varios codigos, lo harias con estos .c's. Probablemente despues proveamos una mejor manera de hacerlo que haciendote compilar todo a mano.
+
 [Esto lo va a hacer el make]
+
 Despues, vas a compilar con gcc final_compiler.c code_container.c blahblahblah -o miprograma.out
 
 Y voila!
