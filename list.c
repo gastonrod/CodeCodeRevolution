@@ -1,6 +1,7 @@
 #include <stdlib.h> 
 #include <stdio.h>
 #include "list.h"
+#include "utilities.h"
 extern ListADT list;
 extern struct point board_size;
 extern struct point pos;

@@ -75,7 +75,7 @@ void print_main(){
 	 "  return 1;\n"
          "}\n\n"
 	 
-	 "void hacer_adds(){\n", porcentaje_s);
+	 "void hacer_adds(){\n");
 
 }
 
