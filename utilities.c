@@ -33,14 +33,6 @@ void print_board(Board board){
     printf("\n");
   }
 }
-void print_board2(Board board){
-  for(int i = 0; i < board_size.b; i++){
-    for(int j = 0; j < board_size.a; j++){
-      printf("%d ", board[i][j].op_type);
-    }
-    printf("\n");
-  }
-}
 
 struct instruction* get_instruction(struct point pos, operation_type ot, subtype_enum st, struct point bb, int b, int num){
   struct operation* op = malloc(sizeof *op);

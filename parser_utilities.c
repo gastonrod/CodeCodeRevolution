@@ -67,7 +67,7 @@ void print_main(){
 	 "  set_size();\n"
 	 "  board = malloc((sizeof *board) * board_size.b);\n"
 	 "  for(int i = 0; i < board_size.b; i++)\n"
-	 "    board[i] = malloc((sizeof *board) * board_size.a);\n"
+	 "    board[i] = malloc((sizeof **board) * board_size.a);\n"
          "  hacer_adds();\n"
 	 "  print_board(board);\n"
 	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"
