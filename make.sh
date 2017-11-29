@@ -1,4 +1,6 @@
-echo Compilando
+if [ $# > 2 ];then
+  echo Pasaste demasiados argumentos
+fi
 echo Flexeando el board lexer
 flex -o grammar.lex.c -l board_lexer.l
 echo Flexeando el code lexer
@@ -9,19 +11,14 @@ echo Compilando el compilador de codigo
 gcc -o code_compiler.out code.lex.c
 echo Compilando el compilador del tablero
 gcc -o board_compiler.out grammar.lex.c grammar.tab.c list.c utilities.c board.c parser_utilities.c -lm -ll
+
 if [ $# == 0 ];then
-  ./board_compiler.out > final_compiler.c < prueba_gramatica.txt
+  ./compile_board.sh prueba_gramatica.txt
 else
-  ./board_compiler.out > final_compiler.c < $1
-fi
-if [ $? == 0 ];then
-  rm final_compiler.c
+  ./compile_board.sh $1
 fi
 if [ $# == 1 ] || [ $# == 0 ];then
-  ./code_compiler.out > code_container.c < prueba_codigo.txt
+  ./compile_code.sh prueba_codigo.txt
 else
-  ./code_compiler.out > code_container.c < $2
-fi
-if [ $? == 0 ];then
-  rm code_container.c
+  ./compile_code.sh $2
 fi

@@ -23,9 +23,13 @@ final_compiler.c
 code_container.c
 ```
 
-Al code_compiler.out le pasas por entrada estandar codigo y al board_compiler.out le pasas el tablero. Esto ya lo hizo automaticamente el make.sh con lo que le hayas pasado. Pero en caso de querer usar un codigo para mas de un tablero, o un tablero para varios codigos, lo harias con estos .c's. Probablemente despues proveamos una mejor manera de hacerlo que haciendote compilar todo a mano.
+Para usar el board_compiler.out esta el script compile_board.sh, al cual le pasas por argumento el tablero que quieras compilar.
 
-[Esto lo va a hacer el make]
+Lo mismo con el code_compiler.out y compile_code.sh.
+
+Esto ya lo hizo automaticamente el make.sh con lo que le hayas pasado. Pero en caso de querer usar un codigo para mas de un tablero, o un tablero para varios codigos.
+
+[vvv Esto lo va a hacer el make vvv ]
 
 Despues, vas a compilar con gcc final_compiler.c code_container.c blahblahblah -o miprograma.out
 
