@@ -1,17 +1,7 @@
 if [ $# -gt 3 ];then
   echo Pasaste demasiados argumentos
 fi
-echo Flexeando el board lexer
-flex -o grammar.lex.c -l board_lexer.l
-echo Flexeando el code lexer
-flex -o code.lex.c -l code_lexer.l
-echo yacc
-yacc -o grammar.tab.c -vd parser.y
-echo Compilando el compilador de codigo 
-gcc -o code_compiler.out code.lex.c
-echo Compilando el compilador del tablero
-gcc -o board_compiler.out grammar.lex.c grammar.tab.c list.c utilities.c board.c parser_utilities.c
-
+make
 if [ $# -eq 0 ];then
   ./compile_board.sh prueba_gramatica.txt
 else
