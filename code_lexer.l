@@ -142,7 +142,7 @@ int main(void) {
          "#define BUFFER_SIZE 1024\n"
          "char* code= \"%s\";\n"
          "char* function[BUFFER_SIZE];\n"
-         "void fill_functions(){\n", code, code);
+         "void fill_functions(){\n", code);
   for(int i = 0; i < BUFFER_SIZE; i++){
     if(function[i] != NULL){
       int fun_len = strlen(function[i]);

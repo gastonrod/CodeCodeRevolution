@@ -18,6 +18,7 @@
   void quick_add(operation_type ot, subtype_enum st);
   void quick_add_comp(subtype_enum st);
   ListADT list;
+  int yyerror(char*);
 %}
 
 
@@ -84,15 +85,13 @@ int main(int argc,char* argv[])
   return 1;  
 }
  
-int yyerror( s )
-char *s;
+int yyerror(char * s)
 {
-  warning( s , ( char * )0 );
+  warning(s , ( char * )0);
   yyparse();
 }
  
-int warning( s , t )
-char *s , *t;
+int warning(char * s , char * t)
 {
   fprintf( stderr ,"%s: %s\n" , progname , s );
   if ( t )

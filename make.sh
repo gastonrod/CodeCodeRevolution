@@ -10,7 +10,7 @@ yacc -o grammar.tab.c -vd parser.y
 echo Compilando el compilador de codigo 
 gcc -o code_compiler.out code.lex.c
 echo Compilando el compilador del tablero
-gcc -o board_compiler.out grammar.lex.c grammar.tab.c list.c utilities.c board.c parser_utilities.c -lm -ll
+gcc -o board_compiler.out grammar.lex.c grammar.tab.c list.c utilities.c board.c parser_utilities.c
 
 if [ $# == 0 ];then
   ./compile_board.sh prueba_gramatica.txt
