@@ -6,6 +6,6 @@ compiler
 *.o*
 a.c
 a.brd
-final_compiler.c
+board_runner.c
 code_container.c
 *.a
