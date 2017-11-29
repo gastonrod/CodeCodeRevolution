@@ -11,6 +11,8 @@ Si no le pasas argumento al make.sh toma por default prueba_gramatica.txt como b
 Si le pasas 1 argumento asume que es el board a armar. 
 
 Si le pasas dos argumentos el 1ero es el board el 2ndo es el codigo.
+
+Si le pasas tres argumentos, lo mismo de arriba y el 3ero es el nombre del ejecutable que se genera con ese board y ese tablero.
 ```
 ./make.sh [archivo con el tablero definido]
 ```
@@ -29,9 +31,13 @@ Lo mismo con el code_compiler.out y compile_code.sh.
 
 Esto ya lo hizo automaticamente el make.sh con lo que le hayas pasado. Pero en caso de querer usar un codigo para mas de un tablero, o un tablero para varios codigos.
 
-[vvv Esto lo va a hacer el make vvv ]
+En caso de querer haber compilado otro codigo u otro tablero y no queres hacer el make.sh denuevo, podes hacer 
+```
+./compile_ccr.sh [ nombre que queres para el ejecutable ]
+```
 
-Despues, vas a compilar con gcc final_compiler.c code_container.c blahblahblah -o miprograma.out
+Que te genera un ejecutable a partir del ultimo tablero que hayas compilado y el ultimo codigo que hayas compilado ( final_compiler.c y code_container.c )
+
 
 Y voila!
 

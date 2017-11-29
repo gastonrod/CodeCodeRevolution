@@ -22,3 +22,9 @@ if [ $# == 1 ] || [ $# == 0 ];then
 else
   ./compile_code.sh $2
 fi
+
+if [ $# == 3 ];then
+  ./compile_ccr.sh $3
+else
+  ./compile_ccr.sh 
+fi
