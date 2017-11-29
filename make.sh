@@ -1,20 +1,29 @@
+# Argumentos:
+# 1: nombre del archivo con la definición del tablero en CCR  ('' por defecto)
+# 2: nombre del archivo con los movimientos en CCR ('' por defecto)
+# 3: nombre del programa final ('a.out' por defecto)
 if [ $# -gt 3 ];then
-  echo Pasaste demasiados argumentos
+  echo "Uso: $0 [ <board> [ <moves> [ <target> ] ] ]"
+  exit 1
 fi
 make
-if [ $# -eq 0 ];then
-  ./compile_board.sh prueba_gramatica.txt
-else
-  ./compile_board.sh $1
-fi
-if [ $# -eq 1 ] || [ $# -eq 0 ];then
-  ./compile_code.sh prueba_codigo.txt
-else
-  ./compile_code.sh $2
+if [ $? -ne 0 ];then
+	exit 1
 fi
 
-if [ $# -eq 3 ];then
-  ./compile_ccr.sh $3
-else
-  ./compile_ccr.sh 
+BOARD_CCR="prueba_gramatica.txt"
+MOVES_CCR="prueba_codigo.txt"
+TARGET="a.out"
+if [ $# -ge 1 ];then
+	BOARD_CCR="$1"
 fi
+if [ $# -ge 2 ];then
+	MOVES_CCR="$2"
+fi
+if [ $# -ge 3 ];then
+	TARGET="$3"
+fi
+
+./board_compiler.out < $BOARD_CCR > board_runner.c
+./code_compiler.out < $MOVES_CCR > code_container.c
+gcc board_runner.c code_container.c -L. -lccr -o $TARGET

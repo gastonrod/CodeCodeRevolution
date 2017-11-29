@@ -4,10 +4,11 @@ SA=yacc
 CC=gcc
 CFLAGS=-g
 #CFLAGS = -g --std=c99 -D_GNU_SOURCE -pedantic -pedantic-errors -Wall -Wextra  -Werror -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable
-BOARD_OBJECTS=board.lex.o
+BOARD_OBJECTS=board.lex.o grammar.tab.o
 CODE_OBJECTS=code.lex.o
-LIB_OBJECTS=grammar.tab.o list.o utilities.o board.o parser_utilities.o
+LIB_OBJECTS=list.o utilities.o board.o parser_utilities.o
 LIBRARY=libccr.a
+LIBRARY_HEADER=libccr.h
 LIB_FLAGS=-L. -lccr
 
 grammar.tab.c: parser.y
@@ -24,6 +25,16 @@ board.lex.c: board_lexer.l grammar.tab.c
 
 $(LIBRARY): $(LIB_OBJECTS)
 	ar rcs $(LIBRARY) $(LIB_OBJECTS)
+	TEMP_HEADER="temp_header.h";	\
+	touch $$TEMP_HEADER;	\
+	FILES="$(LIB_OBJECTS)";	\
+	for FILE in $$FILES;do	\
+		HEADER=$$(echo "$$FILE" | sed "s/\.o$$/\.h/g");	\
+		echo "#include \""$$HEADER"\"" >> $$TEMP_HEADER;	\
+		echo >> $$TEMP_HEADER;	\
+	done;	\
+	gcc -E -P $$TEMP_HEADER -o $(LIBRARY_HEADER);	\
+	rm -f $$TEMP_HEADER
 
 link: $(BOARD_OBJECTS) $(CODE_OBJECTS) $(LIBRARY)
 	$(CC) -static $(BOARD_OBJECTS) -o board_compiler.out $(LIB_FLAGS)
@@ -40,3 +51,4 @@ clean:
 	rm -f code.lex.c
 	rm -f *.o*
 	rm -f *.a
+	rm -f libccr.h
