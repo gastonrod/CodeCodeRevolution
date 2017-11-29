@@ -1,4 +1,3 @@
-echo $1
 if [ -f "code_compiler.out" ];then
   if [ $# != 1 ];then
     echo Tenes que pasar un argumento con el nombre del archivo que contiene el codigo.
