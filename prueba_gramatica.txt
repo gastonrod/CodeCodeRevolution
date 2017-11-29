@@ -1,13 +1,13 @@
 4,3
 1,1 ipb
-1,2 ply
-1,3 ipb
-1,4 dpb
-2,1 ipf
+2,1 ply
+3,1 ipb
+4,1 dpb
+1,2 ipf
 2,2 dpf
-2,3 rdc
-2,4 ptc
-3,1 add 1
-3,2 sub 1
+3,2 rdc
+4,2 ptc
+1,3 add 1
+2,3 sub 1
 3,3 div b1,b2
-3,4 mul 178
+4,3 mul 178

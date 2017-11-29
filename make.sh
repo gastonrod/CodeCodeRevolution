@@ -1,4 +1,4 @@
-if [ $# > 2 ];then
+if [ $# -gt 3 ];then
   echo Pasaste demasiados argumentos
 fi
 echo Flexeando el board lexer

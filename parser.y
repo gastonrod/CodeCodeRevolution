@@ -76,7 +76,7 @@ int main(int argc,char* argv[])
 
   while(iter_has_next(iterator)){
     struct instruction inst = *iter_get_next(iterator);
-    if((*inst.pos).a < 1 || (*inst.pos).a > board_size.b || (*inst.pos).b < 1 || (*inst.pos).b > board_size.a){
+    if((*inst.pos).a < 1 || (*inst.pos).a > board_size.a || (*inst.pos).b < 1 || (*inst.pos).b > board_size.a){
       fprintf(stderr, "Error! Index out of bounds. Fijate como estas armando la tabla\n");
       exit(0);
     }

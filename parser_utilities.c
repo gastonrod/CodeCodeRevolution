@@ -19,7 +19,7 @@ void print_add_instruction(operation_type ot, subtype_enum st, struct point pos)
 	 "  single_n   = %d;\n"
 	 "  pos.a      = %d;\n"
 	 "  pos.b      = %d;\n"
-	 "  add_instruction_to_board(board, *get_instruction(pos, %s, %s, double_b, single_b, single_n));\n", double_b.a, double_b.b, single_b, single_n, pos.a, pos.b, operation_type_string[ot], subtype_string[st]);
+	 "  add_instruction_to_board(board, pos.b-1, pos.a-1, *get_instruction(pos, %s, %s, double_b, single_b, single_n));\n", double_b.a, double_b.b, single_b, single_n, pos.a, pos.b, operation_type_string[ot], subtype_string[st]);
 }
 
 void print_add_composite_instruction(subtype_enum st, struct point pos){
@@ -65,10 +65,9 @@ void print_main(){
   char porcentaje_s[3] = "%s\0";
   printf("int main(){\n"
 	 "  set_size();\n"
-	 "  // Esto deberia ser new_board, pero no lo se hacer andar\n"
-	 "  board = malloc((sizeof *board) * board_size.a);\n"
-	 "  for(int i = 0; i < board_size.a; i++)\n"
-	 "    board[i] = malloc((sizeof *board) * board_size.b);\n"
+	 "  board = malloc((sizeof *board) * board_size.b);\n"
+	 "  for(int i = 0; i < board_size.b; i++)\n"
+	 "    board[i] = malloc((sizeof *board) * board_size.a);\n"
          "  hacer_adds();\n"
 	 "  print_board(board);\n"
 	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"

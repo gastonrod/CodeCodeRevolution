@@ -10,6 +10,6 @@ void new_board(Board board, struct point size){
 }
 
 
-void add_instruction_to_board(Board board, struct instruction inst){
-  board[(*inst.pos).a-1][(*inst.pos).b-1] = *inst.op;
+void add_instruction_to_board(Board board, int i, int j, struct instruction inst){
+  board[i][j] = *inst.op;
 }
