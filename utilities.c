@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "types.h"
-#include "list.h"
 #include "board.h"
 #include "utilities.h"
 extern struct point board_size;
@@ -11,7 +10,6 @@ extern int single_n;
 extern char type[3];
 
 
-extern ListADT list;
 char* operation_type_string[] = {"ipb","dpb","ipf","dpf","add","mul","diV","sub","rdc","ptc","ply","ifz"};
 char* subtype_string[] = {"none", "BB" , "B", "NUM"};
 
@@ -35,29 +33,19 @@ void print_board(Board board){
   }
 }
 
-void quick_add(operation_type ot, subtype_enum st){
-  add_to_list(list,get_instruction(pos, ot, st, double_b, single_b, single_n));
-  switch(st){
-    case BB:
-      double_b.a = 0;
-      double_b.b = 0;
-      break;
-    case B:
-      single_b   = 0;
-      break;
-    case NUM:
-      single_n   = 0;
-      break;
-  }
-}
-void quick_add_comp(subtype_enum st){
-  if     (type[0] == 'a')
-    quick_add(add, st);
-  else if(type[0] == 's')
-    quick_add(sub, st);
-  else if(type[0] == 'm')
-    quick_add(mul, st);
-  else if(type[0] == 'd')
-    quick_add(diV, st);
+struct instruction* get_instruction(struct point pos, operation_type ot, subtype_enum st, struct point bb, int b, int num){
+  struct operation* op = malloc(sizeof *op);
+  op->op_type = ot;
+  op->subtype = st;
+  op->bb      = bb;
+  op->b       = b;
+  op->num     = num;
+  struct point* position = malloc(sizeof *position);
+  position->a = pos.a;
+  position->b = pos.b;
+  struct instruction* inst = malloc(sizeof *inst);
+  inst->op = op;
+  inst->pos= position;
+  return inst;
 }
 

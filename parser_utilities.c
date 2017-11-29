@@ -19,7 +19,7 @@ void print_add_instruction(operation_type ot, subtype_enum st, struct point pos)
 	 "  single_n   = %d;\n"
 	 "  pos.a      = %d;\n"
 	 "  pos.b      = %d;\n"
-	 "  quick_add(%s, %s);\n", double_b.a, double_b.b, single_b, single_n, pos.a, pos.b, operation_type_string[ot], subtype_string[st]);
+	 "  add_instruction_to_board(board, *get_instruction(pos, %s, %s, double_b, single_b, single_n));\n", double_b.a, double_b.b, single_b, single_n, pos.a, pos.b, operation_type_string[ot], subtype_string[st]);
 }
 
 void print_add_composite_instruction(subtype_enum st, struct point pos){
@@ -38,8 +38,8 @@ void print_includes(){
 	 "#include <stdlib.h>\n"
 	 "#include \"types.h\"\n"
 	 "#include \"board.h\"\n"
-         "#include \"list.h\"\n"
 	 "#include \"utilities.h\"\n"
+	 "#include \"code_executor.c\"\n"
 	 "\n\n"
 	 "#define BUFFER_SIZE 1024\n"
 	 "\n\n"
@@ -47,7 +47,6 @@ void print_includes(){
 	 "void set_size();\n"
          "void yylex();\n"
 	 "\n\n"
-	 "ListADT list;\n"
          "extern char* operation_type_string[];\n"
          "extern char* subtype_string[];\n"
 	 "extern char* code;\n"
@@ -57,6 +56,7 @@ void print_includes(){
          "int single_b;\n"
          "int single_n;\n"
          "char type[3];\n"
+         "Board board;\n"
 	 "\n\n"
 );
 }
@@ -64,25 +64,15 @@ void print_includes(){
 void print_main(){
   char porcentaje_s[3] = "%s\0";
   printf("int main(){\n"
-         "  list = new_list();\n"
-         "  hacer_adds();\n"
 	 "  set_size();\n"
-	 "  ListIteratorADT iterator = get_iterator(list);\n"
-	 "  struct instruction inst;\n"
-	 "  Board board;\n"
 	 "  // Esto deberia ser new_board, pero no lo se hacer andar\n"
-	 "  // new_board(board);\n"
 	 "  board = malloc((sizeof *board) * board_size.a);\n"
 	 "  for(int i = 0; i < board_size.a; i++)\n"
 	 "    board[i] = malloc((sizeof *board) * board_size.b);\n"
-	 "  while(iter_has_next(iterator)){\n"
-	 "    struct instruction inst = *iter_get_next(iterator);\n"
-	 "    //print_instruction(inst);\n"
-	 "    add_instruction_to_board(board, inst);\n"
-	 "  }\n"
+         "  hacer_adds();\n"
 	 "  print_board(board);\n"
 	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"
-	 "  printf(\"Codigo recibido, aca hay que armar la maquina de estados y eso\\n\");\n"
+	 "  run_code();\n"
 	 "  return 1;\n"
          "}\n\n"
 	 
