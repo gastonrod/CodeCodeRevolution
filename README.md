@@ -57,63 +57,64 @@ make.sh ejemplo.board.ccr ejemplo.moves.ccr target.out
 ## Lenguaje
 
 ### Instrucciones disponibles
-**pb**: puntero de buckets
+*pb* refiere al puntero de buckets
+*pf* refiere al puntero a función
 
-**pf**: puntero a función
+#### Opreaciones matemáticas
 
+* **add**	Suma
 
-**add**    |
+* **sub**	Resta
 
-**sub**    |
+* **mul**	Multiplicación
 
-**mul**    | -> (número|bucket,(bucket|número))
+* **div**	División entera
 
-**div**    |
-```
-        add b1,b2     // Guarda en el lugar al que esté apuntando el pb la suma entre                     b1 y b2
-        div b1,5     // Lo mismo pero b1/5
-        add 5        // Le suma 5 al bucket apuntado por el pb
-```
+Todas éstas tienen tres formas posibles según los parámetros
 
-Increase y decrease punteros.
+* **num**	aplica la operación con el bucket actual como primer operando y el literal numérico natural (num) como segundo operando
+* **bucket**	aplica la operación con el bucket actual como primer operando y el bucket de parámetro como segundo operando
+* **bucket,bucket**	aplica la operación con entre los buckets
 
-**ipb**    incrementa el pb 
+Todas guardan el resultado de la operación en el bucket actual (apuntado por *pb*)
 
-**dpb**    decrementa el pb
+#### Otras operaciones
 
-**ipf**    incrementa el pf
+* **ipb**	Incrementa el *pb*. Si ya se encuentra en el último bucket, el comportamiento es indefinido. 
 
-**dpf**    decrementa el pf
+* **dpb**	Decrementa el *pb*. Si ya se encuentra en el primer bucket, el comportamiento es indefinido.
 
+* **ipf**	Incrementa el *pf*. Si ya se encuentra en el último bucket, el comportamiento es indefinido.
 
-**rdc**    lee un char y lo guarda en el bucket que está siendo apuntado por el pb (readchar())
+* **dpf**	Decrementa el *pf*. Si ya se encuentra en el primer bucket, el comportamiento es indefinido.
 
+* **rdc**	Lee un caracter de la entrada estándar y lo guarda en el bucket que está siendo apuntado por el *pb*; en caso de error o de fin de archivo, deja un -1
 
-**ptc**    escribe lo que sea que esté siendo apuntado por el pb (un char) (putchar())
+* **ptc**	Escribe a la salida estándar el caracter contenido en el bucket apuntado por *pb* putchar()
 
-**ply**    Ejecuta la función a la que está apuntando el pf
+* **ply**	Ejecuta la función a la que está apuntando el *pf*. Si el bucket no contiene ninguna función, el comportamiento es indefinido.
 
-**ifz**    Si la variable que está siendo apuntada por el pb es cero, entonces se mueve el “instruction pointer” hacia el tag definido inmediatamente después de la J que lo hizo saltar sobre el ifz. 
+* **ifz**	Si la variable que está siendo apuntada por el *pb* es cero, se mueve el *“instruction pointer”* hacia el tag de *goto* inmediatamente después de la J ejecutó la instrucción el ifz. Si no, se sigue con la próxima instrucción de movimiento. Si no se encuentra un *goto* inmediatamente después de dicha J, el comportamiento es indefinido. Si el *goto* refiere a una etiqueta que no fue definida, el comportamiento es indefinido.
 
 ### Forma del código
 
-**//**    Comentario hasta el \n, todo lo que esté entre esto y el \n se borra
+* **//**	 Comentario hasta el \n, todo lo que esté entre esto y el \n se borra
 
-**U**    Moverse un casillero hacia arriba
+* **U**		Moverse un casillero hacia arriba
 
-**D**    Moverse un casillero hacia abajo
+* **D**		Moverse un casillero hacia abajo
 
-**L**    Moverse un casillero hacia la izquierda
+* **L**		Moverse un casillero hacia la izquierda
 
-**R**    Moverse un casillero hacia la derecha
+* **R**		Moverse un casillero hacia la derecha
 
-**J**    Ejecutar la instrucción del casillero actual
+* **J**		Ejecutar la instrucción del casillero actual
 
-{num}        Define un tag para hacer gotos.
+* **{num}**	Define una etiqueta (para hacer *goto*).
 
-{gotonum}    Es donde se ejecuta el go to después de un ifz.
+* **{gotonum}** Declara la potencial etiqueta a la que saltar después de un *ifz*
 
-[num]:       Define una función que se va a guardar en el bucket de funciones número num.
+* **[num]**	Define una función que se va a guardar en el bucket de funciones número *num*.
 
 ### Gramática del lenguaje
 
