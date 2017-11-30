@@ -63,7 +63,6 @@ void print_includes(){
 }
 
 void print_main(){
-  char porcentaje_s[3] = "%s\0";
   printf("int main(){\n"
 	 "  set_size();\n"
 	 "  board = malloc((sizeof *board) * board_size.b);\n"

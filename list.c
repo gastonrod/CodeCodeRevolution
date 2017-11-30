@@ -93,6 +93,8 @@ void quick_add(operation_type ot, subtype_enum st){
     case NUM:
       single_n   = 0;
       break;
+    default:
+      break;
   }
 }
 void quick_add_comp(subtype_enum st){

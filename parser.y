@@ -18,7 +18,7 @@
   void quick_add(operation_type ot, subtype_enum st);
   void quick_add_comp(subtype_enum st);
   ListADT list;
-  int yyerror(char*);
+  void yyerror(char*);
 %}
 
 
@@ -73,7 +73,7 @@ int main(int argc,char* argv[])
 
   
   ListIteratorADT iterator = get_iterator(list);
-  struct instruction inst;
+  //struct instruction inst;
 
   while(iter_has_next(iterator)){
     struct instruction inst = *iter_get_next(iterator);
@@ -85,7 +85,7 @@ int main(int argc,char* argv[])
   return 1;  
 }
  
-int yyerror(char * s)
+void yyerror(char * s)
 {
   warning(s , ( char * )0);
   yyparse();
@@ -96,4 +96,5 @@ int warning(char * s , char * t)
   fprintf( stderr ,"%s: %s\n" , progname , s );
   if ( t )
     fprintf( stderr , " %s\n" , t );
+  return 0;
 }
