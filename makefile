@@ -19,6 +19,15 @@ code.lex.c: code_lexer.l grammar.tab.c
 board.lex.c: board_lexer.l grammar.tab.c
 	$(LA) -o board.lex.c -l board_lexer.l
 
+grammar.tab.o: grammar.tab.c
+	$(CC) -c $< -o $@
+
+code.lex.o: code.lex.c
+	$(CC) -c $< -o $@
+
+board.lex.o: board.lex.c
+	$(CC) -c $< -o $@
+
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
