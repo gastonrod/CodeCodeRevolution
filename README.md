@@ -79,15 +79,17 @@ Increase y decrease punteros.
 
 ### Forma del código
 
-//    Comentario hasta el \n, todo lo que esté entre esto y el \n se borra
+**//**    Comentario hasta el \n, todo lo que esté entre esto y el \n se borra
 
-U    Moverse un casillero hacia arriba
+**U**    Moverse un casillero hacia arriba
 
-D    Moverse un casillero hacia abajo
+**D**    Moverse un casillero hacia abajo
 
-L    Moverse un casillero hacia la izquierda
+**L**    Moverse un casillero hacia la izquierda
 
-R    Moverse un casillero hacia la derecha
+**R**    Moverse un casillero hacia la derecha
+
+**J**    Ejecutar la instrucción del casillero actual
 
 {num}        Define un tag para hacer gotos.
 
