@@ -26,8 +26,8 @@ void print_operation(struct operation op){
 }
 
 void print_board(Board board){
-  for(int i = 0; i < board_size.b; i++){
-    for(int j = 0; j < board_size.a; j++){
+  for(unsigned int i = 0; i < board_size.b; i++){
+    for(unsigned int j = 0; j < board_size.a; j++){
       printf("%s ", operation_type_string[board[i][j].op_type]);
     }
     printf("\n");
