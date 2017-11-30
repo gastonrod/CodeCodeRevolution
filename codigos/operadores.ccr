@@ -1,0 +1,15 @@
+// Ejemplo de los posibles operadores y las formas de usarlos.
+ddj 	// ipb -> b1
+uur 	// add 1
+jjjjjjjjjjjjjjjjjjjjjjjjj 	// 25
+ddlj 	// ipb -> b2
+uur 	// add 1
+jj 		// 2
+ddjj 	// dpb -> b0
+uulj 	// mul b1,b2 -> 50
+dj 		// ptc -> '2'
+rj 		// mul b2 -> 100
+lj 		// ptc -> 'd'
+ddj 	// div b2 -> 50
+rj 		// sub 1 -> 49
+uulj 	// ptc -> '1'

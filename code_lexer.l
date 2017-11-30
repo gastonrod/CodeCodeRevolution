@@ -60,18 +60,18 @@ void concat_code(){
 void concat_function(){
   int len = strlen(yytext);
   for(int i = 0; i < len; i++, size++){
-    if(size % BUFFER_SIZE == 0)
+    if(size % BUFFER_SIZE == 0){
       function[current_function]= realloc(function[current_function], (size + BUFFER_SIZE) * sizeof function[current_function][0]);
-    
-    function[current_function][size] = toupper(yytext[i]);
+    }
+    function[current_function][size] = toupper(yytext[i]);      
   }
-
+ 
 
 }
 void add_tag(){
   char*num[2];
   strsplit(yytext,num,"}");
-  tags[atoi(num[0]+1)-1]= size;
+  tags[atoi(num[0]+1)-1] = size;
 }
 
 void add_goto(){
@@ -142,13 +142,26 @@ int main(void) {
          "#define BUFFER_SIZE 1024\n"
          "char* code= \"%s\";\n"
          "char* function[BUFFER_SIZE];\n"
+         "int tags [BUFFER_SIZE];\n"
          "void fill_functions(){\n", code);
   for(int i = 0; i < BUFFER_SIZE; i++){
     if(function[i] != NULL){
       int fun_len = strlen(function[i]);
       printf("function[%d]= malloc(%d * sizeof function[0]);\n",i, fun_len);
-      for(int j = 0; j < fun_len;j++)
-        printf("function[%d][%d] = '%c';\n",i, j, function[i][j]);
+      for(int j = 0; j <= fun_len;j++){
+        if(j < fun_len){
+          printf("function[%d][%d] = '%c';\n",i, j, function[i][j]);          
+        } else {
+          printf("function[%d][%d] = %d;\n",i, j, 0);          
+        }
+      }
+    }    
+  }
+  printf("}\n");
+  printf("void fill_tags(){\n");
+  for(int i = 0; i < BUFFER_SIZE; i++){
+    if(tags[i] != NULL) {
+      printf("tags[%d] = %d;\n",i, tags[i]);
     }
   }
   printf("}\n");

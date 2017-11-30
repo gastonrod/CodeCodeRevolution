@@ -1,0 +1,12 @@
+// Imprimo F 10 veces
+jjjjjjj 	// add 10 -> 'F' en b1
+dj 			// ipb -> b2
+uj 			// add 10 -> 10 en b2
+ddr 		// me paro en ifz
+{1}
+uuj 		// sub 1 en b2
+dj 			// dpb -> b1
+ldj			// ptc -> 'F'
+uj 			// ipb -> b2
+rdj 		// presiono ifz
+{goto1}
