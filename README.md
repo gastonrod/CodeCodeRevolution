@@ -1,47 +1,44 @@
 # Code Code Revolution
 
-Trabajo práctico de Automatas, Teoria de Lenguajes y Compiladores.
+Trabajo práctico de Autómatas, Teoría de Lenguajes y Compiladores.
 
-# Correr el proyecto
+## Proyecto
 
-Clona el repositorio
+### Construir el proyecto
 
-Si no le pasas argumento al make.sh toma por default prueba_gramatica.txt como board a armar y prueba_codigo.txt como el codigo a ejecutar.
+En el *root* del proyecto se encuentra el *makefile* para crear generar el proyecto.
+De la ejecución del *make* interesan cuatro archivos:
+* *board_compiler.out*: el compilador del tablero; recibe por entrada estándar el tablero en CCR y devuelve por salida estándar el tablero compilado en C
+* *code_compiler.out*: el compilador de los movimientos; recibe por entrada estándar los movimientos en CCR y devuelve por salida estándar los movimientos compilads en C
+* *libccr.a*: librería estática de utilidades; es necesaria para la compilación de los archivos generados por el *board_compiler.out*
+* *libccr.h*: archivo de cabecera para la librería estática
 
-Si le pasas 1 argumento asume que es el board a armar. 
+### Uso de los compiladores
 
-Si le pasas dos argumentos el 1ero es el board el 2ndo es el codigo.
-
-Si le pasas tres argumentos, lo mismo de arriba y el 3ero es el nombre del ejecutable que se genera con ese board y ese tablero.
+Para poder compilar un programa en CCR se necesita de dos archivos, uno con el tablero (ej: *ejemplo.board.ccr*) y otro con los movimientos (ej: *ejemplo.moves.ccr*).
+La compilación se puede realizar de la siguiente forma:
 ```
-./make.sh [archivo con el tablero definido]
-```
-Esto va a dejar un
-```
-code_compiler.out
-cboard_compiler.out
-
-final_compiler.c
-code_container.c
+board_compiler.out < ejemplo.board.ccr > board_runner.c
+code_compiler.out < ejemplo.moves.ccr > code_container.c
+gcc board_runner.c code_container.c -L. -lccr -o target.out
 ```
 
-Para usar el board_compiler.out esta el script compile_board.sh, al cual le pasas por argumento el tablero que quieras compilar.
+Esto genera el ejecutable *target.out*, que es el resultado de la compilación de CCR a binario de la plataforma en la que se corre.
 
-Lo mismo con el code_compiler.out y compile_code.sh.
+### Script utilitario
 
-Esto ya lo hizo automaticamente el make.sh con lo que le hayas pasado. Pero en caso de querer usar un codigo para mas de un tablero, o un tablero para varios codigos.
-
-En caso de querer haber compilado otro codigo u otro tablero y no queres hacer el make.sh denuevo, podes hacer 
+Para facilitar la construcción y ejecución del proyecto, se provee un script BASH *make.sh*.
+Éste genera el proyecto y luego compila el programa solicitado.
+Para ello, recibe hasta tres argumentos: el código del tablero en CCR, el código de los movimientos en CCR y el nombre del archivo de salida, siendo todos optativos.
+Para ver los defaults, véase las primeras líneas del script.
+Ejemplo de uso:
 ```
-./compile_ccr.sh [ nombre que queres para el ejecutable ]
+make.sh ejemplo.board.ccr ejemplo.moves.ccr target.out
 ```
 
-Que te genera un ejecutable a partir del ultimo tablero que hayas compilado y el ultimo codigo que hayas compilado ( final_compiler.c y code_container.c )
+## Lenguaje
 
-
-Y voila!
-
-# Instrucciones disponibles
+### Instrucciones disponibles
 **pb**: puntero de buckets
 
 **pf**: puntero a función
@@ -80,7 +77,7 @@ Increase y decrease punteros.
 
 **ifz**    Si la variable que está siendo apuntada por el pb es cero, entonces se mueve el “instruction pointer” hacia el tag definido inmediatamente después de la J que lo hizo saltar sobre el ifz. 
 
-# Forma del codigo
+### Forma del código
 
 //    Comentario hasta el \n, todo lo que esté entre esto y el \n se borra
 
@@ -98,9 +95,9 @@ R    Moverse un casillero hacia la derecha
 
 [num]:       Define una función que se va a guardar en el bucket de funciones número num.
 
-# Gramatica del lenguaje
+### Gramática del lenguaje
 
-## Tablero
+#### Tablero
 **Size** ->N,N\nRule
 
 **Rule**->N,N Op\nRule|λ
@@ -110,7 +107,7 @@ R    Moverse un casillero hacia la derecha
 **Tipo**->N|bN,bN|bN
 
 
-### Ejemplo
+##### Ejemplo
 ```
 2,3
 1,1 add 1
@@ -122,7 +119,7 @@ R    Moverse un casillero hacia la derecha
 
 ```
 
-## Codigo
+### Código
 **S** ->u|r|d|l|j|uS|rS|dS|lS|jS|TS|T’S|CS|FS| S|\tS|\nS|λ
 
 **T** ->{N}
@@ -135,8 +132,8 @@ C ->//[a-zA-Z0-9 \t]*(\n|EOF)
 
 F ->[N]:
 
-### Ejemplo
+#### Ejemplo
 ```
-LDLJDJRJUUJRDLUJRURUJJJJUUDRJJLDLLJJJ // Inicializacion (?)
+LDLJDJRJUUJRDLUJRURUJJJJUUDRJJLDLLJJJ // Inicialización (?)
 LDRJDLRJJJJU{1}LDJRJDRLRDJLDRJLRDJLUDLURUDRULRJ{goto1} // Loop para imprimir caracteres
 ```

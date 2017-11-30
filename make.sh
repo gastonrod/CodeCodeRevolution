@@ -1,6 +1,6 @@
 # Argumentos:
-# 1: nombre del archivo con la definición del tablero en CCR  ('' por defecto)
-# 2: nombre del archivo con los movimientos en CCR ('' por defecto)
+# 1: nombre del archivo con la definición del tablero en CCR  ('ejemplo.board.ccr' por defecto)
+# 2: nombre del archivo con los movimientos en CCR ('ejemplo.moves.ccr' por defecto)
 # 3: nombre del programa final ('a.out' por defecto)
 if [ $# -gt 3 ];then
   echo "Uso: $0 [ <board> [ <moves> [ <target> ] ] ]"
@@ -11,8 +11,8 @@ if [ $? -ne 0 ];then
 	exit 1
 fi
 
-BOARD_CCR="prueba_gramatica.txt"
-MOVES_CCR="prueba_codigo.txt"
+BOARD_CCR="ejemplo.board.ccr"
+MOVES_CCR="ejemplo.moves.ccr"
 TARGET="a.out"
 if [ $# -ge 1 ];then
 	BOARD_CCR="$1"
