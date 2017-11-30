@@ -79,6 +79,8 @@ void set_single_b(){
 void set_single_number(){
   single_n = atoi(yytext);
 }
+
+void yyerror(char*);
 %}
 %option noyywrap
 %x rule
@@ -135,16 +137,16 @@ digit [1-9][0-9]*
                                    return POINT;
                                   }
 <operador>.|\n                    {
-                                   fprintf(stderr, "La cagaste en un operador\n"); 
-                                   exit(0);
+                                   yyerror("fallo de operador"); 
+                                   exit(1);
                                   }
 <tipo>.|\n                        {
-                                   fprintf(stderr, "La cagaste en tipo\n"); 
-                                   exit(0);
+                                   yyerror("fallo de tipo"); 
+                                   exit(2);
                                   }
 <rule>.|\n                        {
-                                   fprintf(stderr, "La cagaste en rule\n");
-                                    exit(0);
+                                    yyerror("fallo de regla");
+                                    exit(3);
                                   }
 {digit}","{digit}"\n"             {
                                    set_point(true);
@@ -152,8 +154,8 @@ digit [1-9][0-9]*
                                    return SIZE;
                                   }
 .|\n                              {
-                                   fprintf(stderr, "La cagaste al principio\n");
-                                    exit(0);
+                                    yyerror("al principio del archivo");
+                                    exit(4);
                                   }
 
 %%

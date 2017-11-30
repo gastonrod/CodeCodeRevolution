@@ -1,7 +1,9 @@
+#!/bin/bash
 # Argumentos:
 # 1: nombre del archivo con la definición del tablero en CCR  ('ejemplo.board.ccr' por defecto)
 # 2: nombre del archivo con los movimientos en CCR ('ejemplo.moves.ccr' por defecto)
 # 3: nombre del programa final ('a.out' por defecto)
+set -e
 if [ $# -gt 3 ];then
   echo "Uso: $0 [ <board> [ <moves> [ <target> ] ] ]"
   exit 1

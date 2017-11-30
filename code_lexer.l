@@ -128,9 +128,9 @@ code [uldrjULDRJ]
 "\t"                        ;
 " "                         ;
 "{"{digit}"}"               add_tag();BEGIN(codigo);
-.|\n                        { fprintf(stderr, "La cagaste al principio\n"); exit(0); }
-<codigo>.|\n                        { fprintf(stderr, "La cagaste en el codigo principal\n"); exit(0); }
-<funcion>.|\n                        { fprintf(stderr, "La cagaste en una funcion\n"); exit(0); }
+.|\n                        { fprintf(stderr, "Error al principio\n"); exit(1); }
+<codigo>.|\n                        { fprintf(stderr, "Error en el código principal\n"); exit(2); }
+<funcion>.|\n                        { fprintf(stderr, "Error en una función\n"); exit(3); }
 %%
 
 int main(void) { 
@@ -152,6 +152,6 @@ int main(void) {
     }
   }
   printf("}\n");
-  return 1; 
+  return 0; 
 }
 

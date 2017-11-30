@@ -19,6 +19,7 @@
   void quick_add_comp(subtype_enum st);
   ListADT list;
   void yyerror(char*);
+  int yylineno;
 %}
 
 
@@ -73,22 +74,20 @@ int main(int argc,char* argv[])
 
   
   ListIteratorADT iterator = get_iterator(list);
-  //struct instruction inst;
-
+  
   while(iter_has_next(iterator)){
     struct instruction inst = *iter_get_next(iterator);
     if((*inst.pos).a < 1 || (*inst.pos).a > board_size.a || (*inst.pos).b < 1 || (*inst.pos).b > board_size.a){
-      fprintf(stderr, "Error! Index out of bounds. Fijate como estas armando la tabla\n");
-      exit(0);
+      fprintf(stderr, "Error! Index out of bounds. Fijate como estas armando la tabla\n");	//TODO(foviedoITBA): Un mensaje de error mejor
+      exit(1);
     }
   }
-  return 1;  
+  return 0;  
 }
  
 void yyerror(char * s)
 {
-  warning(s , ( char * )0);
-  yyparse();
+  fprintf(stderr, "ERROR NEAR LINE %d: %s\n", yylineno, s);
 }
  
 int warning(char * s , char * t)
