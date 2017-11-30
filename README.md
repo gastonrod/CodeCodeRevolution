@@ -36,6 +36,24 @@ Ejemplo de uso:
 make.sh ejemplo.board.ccr ejemplo.moves.ccr target.out
 ```
 
+### Mapa del proyecto
+
+* *parser.y*: especificación de la gramaica del lenguaje en BNF
+* *board_lexer.l*: especificación de lexemas para la definición del tablero
+* *code_lexer.l*: especificación de lexemas para la definición de los movimientos
+* *makefile*: *makefile* para generar los compiladores
+* *make.sh*: script utilitario para generar los compiladores y compilar un programa
+* *clean.sh*: script utilitario para limpiar el directorio de los archivo generados
+* *README.md*: este documento
+* *list.c*: implementa una lista enlazada con iterador
+* *utilities* y *parser_utilities*: diversas funciones utilitarias
+* *board*: funciones para operar sobre un tablero
+* *code_executor*: funciones que ejecutan las instrucciones del lenguaje CCR
+* *ejemplo.board.ccr*: tablero de ejemplo (en CCR)
+* *ejemplo.moves.ccr*: movimientos de ejmplo (en CCR)
+* *types.h*: definiciones de tipos de datos comunes a varios fuentes
+* *codigos*: carpeta con códigos de ejmplo
+
 ## Lenguaje
 
 ### Instrucciones disponibles
