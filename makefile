@@ -6,7 +6,7 @@ CFLAGS=-g
 #CFLAGS = -g --std=c99 -D_GNU_SOURCE -pedantic -pedantic-errors -Wall -Wextra  -Werror -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable
 BOARD_OBJECTS=board.lex.o grammar.tab.o
 CODE_OBJECTS=code.lex.o
-LIB_OBJECTS=list.o utilities.o board.o parser_utilities.o
+LIB_OBJECTS=list.o utilities.o board.o parser_utilities.o code_executor.o
 LIBRARY=libccr.a
 LIBRARY_HEADER=libccr.h
 LIB_FLAGS=-L. -lccr

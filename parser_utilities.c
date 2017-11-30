@@ -34,12 +34,13 @@ void print_add_composite_instruction(subtype_enum st, struct point pos){
 }
 
 void print_includes(){
-  printf("#include <stdio.h>\n"
-	 "#include <stdlib.h>\n"
+  printf("#include \"libccr.h\"\n"
+	 "#include <stdio.h>\n"
+	 "#include <stdlib.h>\n"/*
 	 "#include \"types.h\"\n"
 	 "#include \"board.h\"\n"
 	 "#include \"utilities.h\"\n"
-	 "#include \"code_executor.c\"\n"
+	 "#include \"code_executor.h\"\n"*/
 	 "\n\n"
 	 "#define BUFFER_SIZE 1024\n"
 	 "\n\n"
