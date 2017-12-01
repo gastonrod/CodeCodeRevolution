@@ -94,7 +94,7 @@ Todas guardan el resultado de la operación en el bucket actual (apuntado por *p
 
 * **ply**	Ejecuta la función a la que está apuntando el *pf*. Si el bucket no contiene ninguna función, el comportamiento es indefinido.
 
-* **ifz**	Si la variable que está siendo apuntada por el *pb* es cero, se mueve el *“instruction pointer”* hacia el tag de *goto* inmediatamente después de la J ejecutó la instrucción el ifz. Si no, se sigue con la próxima instrucción de movimiento. Si no se encuentra un *goto* inmediatamente después de dicha J, el comportamiento es indefinido. Si el *goto* refiere a una etiqueta que no fue definida, el comportamiento es indefinido.
+* **ifz**	Si la variable que está siendo apuntada por el *pb* no es cero, se mueve el *“instruction pointer”* hacia el tag de *goto* inmediatamente después de la J que ejecutó la instrucción el ifz. Caso contrario, se sigue con la próxima instrucción de movimiento. Si no se encuentra un *goto* inmediatamente después de dicha J o si el *goto* refiere a una etiqueta que no fue definida, el programa aborta.
 
 ### Forma del código
 

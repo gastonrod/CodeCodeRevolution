@@ -1,4 +1,5 @@
-// "Hola mundo!" para tablero definido en prueba_gramatica.txt
+// Se imprime "Hola mundo!"
+
 rrj	// Me paro en ipb y apunto b2
 rj 	// add1 en b2
 ldj	// vuelvo a b1

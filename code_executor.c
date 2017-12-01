@@ -32,9 +32,7 @@ void run_code(){
 }
 
 void run(char* actual_code) {
-  //fprintf(stderr, "HOLA\n");
   for(int code_pointer = 0; actual_code[code_pointer] != 0; code_pointer++){
-    //fprintf(stderr, "%c", actual_code[code_pointer]);
     switch(actual_code[code_pointer]){
       case 'R':
           pos_j++;
@@ -60,7 +58,6 @@ void run(char* actual_code) {
 }
 
 void execute(int pos_i, int pos_j, char* actual_code, int *code_pointer){
-  //fprintf(stderr, "%d ", board[pos_i][pos_j].op_type);
   switch(board[pos_i][pos_j].op_type){
     case ipb:
         bucket_pointer++; 

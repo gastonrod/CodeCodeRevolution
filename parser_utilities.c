@@ -64,7 +64,6 @@ void print_main(){
 	 "    board[i] = malloc((sizeof **board) * board_size.b);\n"
      "  hacer_adds();\n"
 	 "  print_board(board);\n"
-	 "  printf(\"tablero armado, a partir de aca es lectura de lrjs y to2 eso\\n\");\n"
 	 "  run_code();\n"
 	 "  return 0;\n"
          "}\n\n"

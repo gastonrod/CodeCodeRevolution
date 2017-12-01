@@ -1,16 +1,42 @@
-// INCOMPLETO
+// Se imprime "Hola mundo!"
 
-ddrrj 	// add 64 '@' en b1
-llj 	// ipb -> b2
-rru 	// me paro en ifz
-{1}
-ullj 	// rdc
-ddj 	// ipb -> b3
-rruuj 	// sub b2,b1 verifico si lei un '@'
-dj 		// ifz
-
-[1]:	// To upper case
-uj		// rdc
-rj 		// sub 32
-dj 		// ptc
-l 		// ply
+rrj	// Me paro en ipb y apunto b2
+rj 	// add1 en b2
+ldj	// vuelvo a b1
+ull // voy a add
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+//bucket actual = 72 == 'H'
+dj // Voy a ptc e imprimo la H
+u  // Vuelvo al add 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // 72+39 = 'o'
+dj // Voy a ptc e imprimo la o
+ur  // Voy al sub 1
+jjj  // 111-3 = 'l'
+dj // ptc 'l'
+u  // sub 1
+jjjjjjjjjjj // 108-11 = 'a'
+dj // ptc 'a'
+u  // sub 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // ' '
+dj // ptc ' '
+ul // add 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // 'm'
+dj // ptc 'm'
+u  // add 1
+jjjjjjjj // 'u'
+dj // ptc 'u;
+ur   // sub 1
+jjjjjjj // 'n'
+dj  // ptc 'n'
+u   // sub 1
+jjjjjjjjjj // 'd'
+dj  // ptc 'd'
+ul  // add 1
+jjjjjjjjjjj // 'o'
+dj // ptc 'o'
+ur   // sub 1
+jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj // '!'
+dj  // ptc '!'
+u 	// sub 1
+jjjjjjjjjjjjjjjjjjjjjjj // '\n'
+dj

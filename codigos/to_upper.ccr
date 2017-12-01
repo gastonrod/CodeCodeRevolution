@@ -1,6 +1,8 @@
-dj 		// ply -> function 1
+// Lee 3 caracteres y los pasa a mayuscula.
 
-[2]:	// To upper case
+djjj	// ply -> function 1
+
+[1]:	// To upper case
 uj		// rdc
 rj 		// sub 32
 dj 		// ptc
